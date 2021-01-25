@@ -4,15 +4,25 @@ const router = express.Router();
 
 const burger = require('../models/burger.js');
 
-burger.get("/", function (req, res) {
+router.get("/", function (request, response) {
     burger.all( function(data) {
-        res.render("index", { burgers: data });
+        response.render("index", { burgers: data });
     });
 });
 
-burger.post("/api/burgers/:name", function(req, response) {
-    burger.create("name", req.body.name, function(result) {
+router.post("/api/burgers/:name", function(request, response) {
+    burger.create(["id", "burger_name"], request.params.name, function(result) {
         response.json( {id: result.id} );
+    });
+});
+
+router.put("/api/burgers/:id", function (request, response) {
+    burger.update("id", request.params.id, true, function (result) {
+        if (result.affectedRows > 0) {
+            response.status(200).end();
+        } else {
+            return res.status(404).end();
+        }
     });
 });
 
