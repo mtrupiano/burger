@@ -1,23 +1,25 @@
 
-<ul>
+<ul> Un-consumed Burgers
     {{#each burgers}}
-    {{#if devoured}}
-    <li>{{name}}</li>
-    {{/if}} 
+    {{#unless devoured}}
+    <li>
+        {{burger_name}} <button id="{{id}}" class="consume-btn">CONSUME THIS BURGER</button>
+    </li>
+    {{/unless}} 
     {{/each}}
 </ul>
 
-<ul>
+<ul> Consumed Burgers
     {{#each burgers}}
-    {{#unless devoured}}
-    <li>{{name}}</li>
-    {{/unless}}
+    {{#if devoured}}
+    <li>{{burger_name}}</li>
+    {{/if}}
     {{/each}}
 </ul>
 
 
 <textarea name="" id="new-burger-name-textarea" cols="30" rows="10"></textarea>
-<button id="submit-new"></button>
+<button id="submit-new">Submit</button>
 
 <script type="text/javascript">
 
@@ -25,8 +27,19 @@
         event.preventDefault();
         const newBurgerName = $("#new-burger-name-textarea").val();
         
-        $.ajax("/burgers/" + newBurgerName, {
+        $.ajax("/api/burgers/" + newBurgerName, {
             type: "POST"
+        }).then( () => {
+            location.reload();
+        });
+    });
+
+    $(".consume-btn").click(function(event) {
+        event.preventDefault();
+        const target = $(event.target);
+        console.log(target);
+        $.ajax("/api/burgers/" + target.attr("id"), {
+            type: "PUT"
         }).then( () => {
             location.reload();
         });
