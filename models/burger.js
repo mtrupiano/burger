@@ -14,9 +14,9 @@ const burger = {
         });
     },
 
-    update: function (objColVals, condition, callback) {
-        orm.updateOne(function() {
-
+    update: function (col, vals, condition, callback) {
+        orm.updateOne(col, vals, condition, function(results) {
+            callback(results);
         });
     }
 };
