@@ -1,0 +1,35 @@
+
+<ul>
+    {{#each burgers}}
+    {{#if devoured}}
+    <li>{{name}}</li>
+    {{/if}} 
+    {{/each}}
+</ul>
+
+<ul>
+    {{#each burgers}}
+    {{#unless devoured}}
+    <li>{{name}}</li>
+    {{/unless}}
+    {{/each}}
+</ul>
+
+
+<textarea name="" id="new-burger-name-textarea" cols="30" rows="10"></textarea>
+<button id="submit-new"></button>
+
+<script type="text/javascript">
+
+    $("#submit-new").click( (event) => {
+        event.preventDefault();
+        const newBurgerName = $("#new-burger-name-textarea").val();
+        
+        $.ajax("/burgers/" + newBurgerName, {
+            type: "POST"
+        }).then( () => {
+            location.reload();
+        });
+    });
+
+</script>
