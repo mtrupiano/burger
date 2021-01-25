@@ -16,8 +16,18 @@ router.post("/api/burgers/:name", function(request, response) {
     });
 });
 
-router.put("/api/burgers/:id", function (request, response) {
+router.put("/api/burgers/consume/:id", function (request, response) {
     burger.update("id", request.params.id, true, function (result) {
+        if (result.affectedRows > 0) {
+            response.status(200).end();
+        } else {
+            return res.status(404).end();
+        }
+    });
+});
+
+router.put("/api/burgers/reset/:id", function (request, response) {
+    burger.update("id", request.params.id, false, function (result) {
         if (result.affectedRows > 0) {
             response.status(200).end();
         } else {

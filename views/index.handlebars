@@ -12,7 +12,9 @@
 <ul> Consumed Burgers
     {{#each burgers}}
     {{#if devoured}}
-    <li>{{burger_name}}</li>
+    <li>
+        {{burger_name}} <button id="{{id}}" class="reset-btn">RESET</button>
+    </li>
     {{/if}}
     {{/each}}
 </ul>
@@ -38,7 +40,18 @@
         event.preventDefault();
         const target = $(event.target);
         console.log(target);
-        $.ajax("/api/burgers/" + target.attr("id"), {
+        $.ajax("/api/burgers/consume" + target.attr("id"), {
+            type: "PUT"
+        }).then( () => {
+            location.reload();
+        });
+    });
+
+    $(".reset-btn").click(function(event) {
+        event.preventDefault();
+        const target = $(event.target);
+        console.log(target);
+        $.ajax("/api/burgers/reset/" + target.attr("id"), {
             type: "PUT"
         }).then( () => {
             location.reload();
