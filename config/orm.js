@@ -12,8 +12,8 @@ const ORM = {
 
     insertOne: ( table, cols, vals, callback ) => {
         const queryStr = 
-            "INSERT INTO " + table + " (" + cols.toString(); + ") VALUES (DEFAULT, ?, ?)";
-
+            "INSERT INTO " + table + " (" + cols.toString() + ") VALUES (DEFAULT, ?)";
+        console.log(vals);
         connection.query(queryStr, vals, function (err, results, fields) {
             if (err) throw err;
 
@@ -21,9 +21,11 @@ const ORM = {
         });
     },
 
-    updateOne: ( burger_id, callback ) => {
-        const queryStr = "UPDATE burgers SET devoured = true WHERE id = ?";
-        connection.query(queryStr, burger_id, function (err, results, fields) {
+    updateOne: ( col, val, condition, callback ) => {
+        const queryStr = 
+            "UPDATE burgers SET devoured = " + condition + 
+            " WHERE " + col.toString() + " = ?";
+        connection.query(queryStr, val, function (err, results, fields) {
             if (err) throw err;
 
             callback(results);
