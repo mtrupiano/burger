@@ -1,25 +1,29 @@
 const connection = require('./connection.js');
 
-class ORM {
+const ORM = {
 
-    selectAll( callback ) {
+    selectAll: ( callback ) => {
         connection.query("SELECT * FROM burgers", function (err, results, fields) {
             if (err) throw err;
 
             callback(results);
         });
-    }
+    },
 
-    insertOne(burger_name, devoured) {
-        connection.query("INSERT INTO burgers VALUES (DEFAULT, ?, ?)", [burger_name, devoured], function (err, results, fields) {
+    insertOne: ( table, cols, vals, callback ) => {
+        const queryStr = 
+            "INSERT INTO " + table + " (" + cols.toString(); + ") VALUES (DEFAULT, ?, ?)";
+
+        connection.query(queryStr, vals, function (err, results, fields) {
             if (err) throw err;
 
             callback(results);
         });
-    }
+    },
 
-    updateOne(burger_id) {
-        connection.query("UPDATE burgers SET devoured = true WHERE id = ?", burger_id, function (err, results, fields) {
+    updateOne: ( burger_id, callback ) => {
+        const queryStr = "UPDATE burgers SET devoured = true WHERE id = ?";
+        connection.query(queryStr, burger_id, function (err, results, fields) {
             if (err) throw err;
 
             callback(results);
