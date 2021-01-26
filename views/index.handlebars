@@ -1,19 +1,19 @@
 
-<ul> Un-consumed Burgers
+<ul class="list-group"> Un-consumed Burgers
     {{#each burgers}}
     {{#unless devoured}}
-    <li>
-        {{burger_name}} <button id="{{id}}" class="btn btn-danger consume-btn">CONSUME THIS BURGER</button>
+    <li class="list-group-item">
+        {{burger_name}} <button id="{{id}}" class="button btn-danger consume-btn">CONSUME THIS BURGER</button>
     </li>
     {{/unless}} 
     {{/each}}
 </ul>
 
-<ul> Consumed Burgers
+<ul class="list-group"> Consumed Burgers
     {{#each burgers}}
     {{#if devoured}}
-    <li>
-        {{burger_name}} <button id="{{id}}" class="btn reset-btn">RESET</button>
+    <li class="list-group-item">
+        {{burger_name}} <button id="{{id}}" class="button reset-btn">RESET</button>
     </li>
     {{/if}}
     {{/each}}
@@ -23,7 +23,7 @@
 <div class="form-group">
     <label for="inputBurgerTextArea">Enter a new burger/sandwich:</label>
     <textarea class="form-control"name="" id="new-burger-name-textarea" cols="30" rows="3"></textarea>
-    <button class="btn" id="submit-new">Submit</button>
+    <button class="button" id="submit-new">Submit</button>
 </div>
 
 <script type="text/javascript">
