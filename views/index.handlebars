@@ -3,7 +3,7 @@
     {{#each burgers}}
     {{#unless devoured}}
     <li>
-        {{burger_name}} <button id="{{id}}" class="consume-btn">CONSUME THIS BURGER</button>
+        {{burger_name}} <button id="{{id}}" class="btn btn-danger consume-btn">CONSUME THIS BURGER</button>
     </li>
     {{/unless}} 
     {{/each}}
@@ -13,15 +13,18 @@
     {{#each burgers}}
     {{#if devoured}}
     <li>
-        {{burger_name}} <button id="{{id}}" class="reset-btn">RESET</button>
+        {{burger_name}} <button id="{{id}}" class="btn reset-btn">RESET</button>
     </li>
     {{/if}}
     {{/each}}
 </ul>
 
 
-<textarea name="" id="new-burger-name-textarea" cols="30" rows="10"></textarea>
-<button id="submit-new">Submit</button>
+<div class="form-group">
+    <label for="inputBurgerTextArea">Enter a new burger/sandwich:</label>
+    <textarea class="form-control"name="" id="new-burger-name-textarea" cols="30" rows="3"></textarea>
+    <button class="btn" id="submit-new">Submit</button>
+</div>
 
 <script type="text/javascript">
 
