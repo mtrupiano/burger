@@ -1,39 +1,62 @@
 
-<div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-4">
-        <ul class="list-group"> Un-consumed Burgers
-            {{#each burgers}}
-            {{#unless devoured}}
-            <li class="list-group-item">
-                {{burger_name}} <button id="{{id}}" class="btn btn-danger consume-btn">CONSUME THIS BURGER</button>
-            </li>
-            {{/unless}} 
-            {{/each}}
-        </ul>
-    </div>
-    <div class="col-md-2"></div>
-    <div class="col-md-4">
-        <ul class="list-group"> Consumed Burgers
-            {{#each burgers}}
-            {{#if devoured}}
-            <li class="list-group-item">
-                {{burger_name}} <button id="{{id}}" class="btn btn-primary reset-btn">RESET</button>
-            </li>
-            {{/if}}
-            {{/each}}
-        </ul>
-    </div>
-</div>
+<nav class="navbar d-flex justify-content-center" id="navbar">
+    <h1>SANDWICH CONSUMER</h1>
+</nav>
 
-<div class="row">
-    <div class="col">
-        <div class="form-group">
-            <label for="inputBurgerTextArea">Enter a new burger/sandwich:</label>
-            <textarea class="form-control"name="" id="new-burger-name-textarea" cols="30" rows="1"></textarea>
-            <button class="btn btn-primary" id="submit-new">Submit</button>
+<div class="container mt-4">
+
+    <div class="row">
+        <div class="col-md-1"></div>
+
+        <div class="col-md-4">
+            <ul class="list-group"> Un-consumed Sandwiches
+                {{#each burgers}}
+                {{#unless devoured}}
+                <li class="list-group-item d-flex justify-content-between">
+                    {{burger_name}} 
+                    <button id="{{id}}" class="btn btn-danger consume-btn">CONSUME THIS SANDWICH</button>
+                </li>
+                {{/unless}} 
+                {{/each}}
+            </ul>
         </div>
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-4">
+            <ul class="list-group"> Consumed Sandwiches
+                {{#each burgers}}
+                {{#if devoured}}
+                <li class="list-group-item d-flex justify-content-between">
+                    {{burger_name}} 
+                    <button id="{{id}}" class="btn btn-warning reset-btn">RESET</button>
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
+
     </div>
+
+    <div class="row mt-4">
+
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="inputBurgerTextArea">Enter a new burger/sandwich:</label>
+                <textarea class="form-control"name="" 
+                    id="new-burger-name-textarea" cols="30" rows="1"></textarea>
+                <div class="row mt-2 d-flex justify-content-center">
+                    <button class="btn btn-primary" id="submit-new">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2"></div>
+
+    </div>
+
 </div>
 
 <script type="text/javascript">
@@ -52,7 +75,6 @@
     $(".consume-btn").click(function(event) {
         event.preventDefault();
         const target = $(event.target);
-        console.log(target);
         $.ajax("/api/burgers/consume/" + target.attr("id"), {
             type: "PUT"
         }).then( () => {
@@ -63,7 +85,6 @@
     $(".reset-btn").click(function(event) {
         event.preventDefault();
         const target = $(event.target);
-        console.log(target);
         $.ajax("/api/burgers/reset/" + target.attr("id"), {
             type: "PUT"
         }).then( () => {
