@@ -1,29 +1,37 @@
 
-<ul class="list-group"> Un-consumed Burgers
-    {{#each burgers}}
-    {{#unless devoured}}
-    <li class="list-group-item">
-        {{burger_name}} <button id="{{id}}" class="button btn-danger consume-btn">CONSUME THIS BURGER</button>
-    </li>
-    {{/unless}} 
-    {{/each}}
-</ul>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-4">
+        <ul class="list-group"> Un-consumed Burgers
+            {{#each burgers}}
+            {{#unless devoured}}
+            <li class="list-group-item">
+                {{burger_name}} <button id="{{id}}" class="btn btn-danger consume-btn">CONSUME THIS BURGER</button>
+            </li>
+            {{/unless}} 
+            {{/each}}
+        </ul>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-4">
+        <ul class="list-group"> Consumed Burgers
+            {{#each burgers}}
+            {{#if devoured}}
+            <li class="list-group-item">
+                {{burger_name}} <button id="{{id}}" class="btn btn-primary reset-btn">RESET</button>
+            </li>
+            {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+</div>
 
-<ul class="list-group"> Consumed Burgers
-    {{#each burgers}}
-    {{#if devoured}}
-    <li class="list-group-item">
-        {{burger_name}} <button id="{{id}}" class="button reset-btn">RESET</button>
-    </li>
-    {{/if}}
-    {{/each}}
-</ul>
-
-
-<div class="form-group">
-    <label for="inputBurgerTextArea">Enter a new burger/sandwich:</label>
-    <textarea class="form-control"name="" id="new-burger-name-textarea" cols="30" rows="3"></textarea>
-    <button class="button" id="submit-new">Submit</button>
+<div class="row">
+    <div class="form-group">
+        <label for="inputBurgerTextArea">Enter a new burger/sandwich:</label>
+        <textarea class="form-control"name="" id="new-burger-name-textarea" cols="30" rows="1"></textarea>
+        <button class="btn btn-primary" id="submit-new">Submit</button>
+    </div>
 </div>
 
 <script type="text/javascript">
