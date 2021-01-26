@@ -40,7 +40,7 @@
         event.preventDefault();
         const target = $(event.target);
         console.log(target);
-        $.ajax("/api/burgers/consume" + target.attr("id"), {
+        $.ajax("/api/burgers/consume/" + target.attr("id"), {
             type: "PUT"
         }).then( () => {
             location.reload();
